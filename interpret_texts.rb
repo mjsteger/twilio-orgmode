@@ -15,6 +15,7 @@ class TextInterpreter
   def interpret_as_file_directive(text)
     file_name, payload = text.match(/\*([^-]+)\s*-\s*(.*)/).captures.map(&:strip)
     file_name = file_name + ".org" unless file_name =~ /.*\..*/
+    payload = payload + "\n" unless payload =~ /.*\n\Z/
     ["#{DROPBOX_LOCATION}#{file_name}", payload]
   end
 
